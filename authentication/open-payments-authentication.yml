@@ -1,0 +1,24 @@
+generated: '2026-07-11'
+method: manual
+source: https://openpaymentsdata.cms.gov/about/api
+summary:
+  types:
+  - none
+schemes:
+- name: none
+  type: none
+  description: >-
+    All public read access to the CMS Open Payments data API is open and requires
+    no authentication - no API key, no token, no account. The metastore catalog,
+    search, datastore query, SQL, and download endpoints are all reachable
+    anonymously over HTTPS. This was confirmed live against the API on the review
+    date.
+  sources:
+  - https://openpaymentsdata.cms.gov/about/api
+notes: >-
+  The underlying DKAN platform exposes write and content-moderation endpoints that
+  require HTTP Basic Authentication, but those are reserved for CMS data
+  publishers and are not part of the public consumer surface documented here.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

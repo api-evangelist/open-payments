@@ -1,0 +1,122 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "CMS Open Payments API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Metastore",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": { "name": "List all datasets.", "type": "http" },
+          "http": { "method": "GET", "url": "https://openpaymentsdata.cms.gov/api/1/metastore/schemas/dataset/items?page-size=10" },
+          "docs": "Lists DCAT-US metadata for every Open Payments dataset. No authentication required."
+        },
+        {
+          "info": { "name": "Get a dataset with reference ids.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://openpaymentsdata.cms.gov/api/1/metastore/schemas/dataset/items/:datasetId?show-reference-ids",
+            "params": [
+              { "name": "datasetId", "value": "0380bbeb-aea1-58b6-b708-829f92a48202", "type": "path", "description": "The dataset UUID." }
+            ]
+          },
+          "docs": "Returns one dataset's metadata; show-reference-ids resolves the distribution identifier used to query the data."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Search",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": { "name": "Search datasets.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://openpaymentsdata.cms.gov/api/1/search?fulltext=general&keyword=2021&page-size=10",
+            "params": [
+              { "name": "fulltext", "value": "general", "type": "query", "description": "Free-text search string." },
+              { "name": "keyword", "value": "2021", "type": "query", "description": "Keyword facet, such as a program year." },
+              { "name": "page-size", "value": "10", "type": "query", "description": "Results per page, max 100." }
+            ]
+          },
+          "docs": "Full-text and faceted search across all Open Payments datasets."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Datastore Query",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": { "name": "Query a dataset distribution (GET).", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://openpaymentsdata.cms.gov/api/1/datastore/query/:datasetId/:index?limit=10&offset=0",
+            "params": [
+              { "name": "datasetId", "value": "0380bbeb-aea1-58b6-b708-829f92a48202", "type": "path", "description": "The dataset UUID (2021 General Payment Data)." },
+              { "name": "index", "value": "0", "type": "path", "description": "The zero-based distribution index." },
+              { "name": "limit", "value": "10", "type": "query", "description": "Maximum rows to return." },
+              { "name": "offset", "value": "0", "type": "query", "description": "Rows to skip for pagination." }
+            ]
+          },
+          "docs": "Returns a page of payment rows plus the total count, column schema, and echoed query."
+        },
+        {
+          "info": { "name": "Query a dataset distribution (POST).", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://openpaymentsdata.cms.gov/api/1/datastore/query/:datasetId/:index",
+            "params": [
+              { "name": "datasetId", "value": "0380bbeb-aea1-58b6-b708-829f92a48202", "type": "path", "description": "The dataset UUID." },
+              { "name": "index", "value": "0", "type": "path", "description": "The zero-based distribution index." }
+            ],
+            "body": { "type": "json", "data": "{\n  \"conditions\": [\n    { \"property\": \"recipient_state\", \"value\": \"CA\", \"operator\": \"=\" }\n  ],\n  \"properties\": [\"covered_recipient_npi\", \"total_amount_of_payment_usdollars\"],\n  \"sorts\": [ { \"property\": \"total_amount_of_payment_usdollars\", \"order\": \"desc\" } ],\n  \"limit\": 25,\n  \"offset\": 0\n}" }
+          },
+          "docs": "Structured JSON query with conditions, column selection, sorting, and pagination."
+        },
+        {
+          "info": { "name": "Download query results as CSV.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://openpaymentsdata.cms.gov/api/1/datastore/query/:datasetId/:index/download?format=csv",
+            "params": [
+              { "name": "datasetId", "value": "0380bbeb-aea1-58b6-b708-829f92a48202", "type": "path", "description": "The dataset UUID." },
+              { "name": "index", "value": "0", "type": "path", "description": "The zero-based distribution index." },
+              { "name": "format", "value": "csv", "type": "query", "description": "Output format: csv or json." }
+            ]
+          },
+          "docs": "Streams the query results as a downloadable CSV or JSON file."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Datastore SQL",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": { "name": "Run a SQL query.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://openpaymentsdata.cms.gov/api/1/datastore/sql?query=[SELECT * FROM resource-id][LIMIT 10];",
+            "params": [
+              { "name": "query", "value": "[SELECT * FROM resource-id][LIMIT 10];", "type": "query", "description": "SQL query referencing a datastore resource by id." }
+            ]
+          },
+          "docs": "Runs a SQL-style query against a datastore resource. Returns HTTP 400 if the query parameter is missing."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

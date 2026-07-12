@@ -1,0 +1,87 @@
+aid: open-payments
+name: CMS Open Payments
+review:
+  question: Does CMS Open Payments expose a documented public WebSocket API?
+  answer: false
+  date: '2026-07-11'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was authored. CMS Open Payments' public API is a DKAN
+    open data catalog whose entire read surface is request/response REST over
+    HTTPS - metastore metadata, dataset search, datastore structured query,
+    datastore SQL, and CSV/JSON download. There is no server-push transport
+    (WebSocket or SSE) on the API to model. The data is static, published in
+    periodic program-year batches, so there is no realtime stream to describe.
+findings:
+  summary: |
+    CMS Open Payments does not publish a documented public WebSocket API. The
+    site at openpaymentsdata.cms.gov is a DKAN data portal exposing a free,
+    no-authentication REST API under https://openpaymentsdata.cms.gov/api/1.
+    All read endpoints are plain HTTPS request/response: the metastore catalog
+    and search, the datastore structured query endpoint (GET and POST), the
+    datastore SQL endpoint, and bulk CSV/JSON download. These were confirmed
+    live on the review date. No realtime, bidirectional, or streaming
+    WebSocket (ws:// or wss://) endpoint is documented anywhere on the Open
+    Payments API. The data model is batch-published payment records by program
+    year, not an event stream.
+  accessModel: |
+    Read access is completely free and requires no API key, token, or account.
+    All queries were run anonymously over HTTPS during the review. The
+    underlying DKAN platform has write/moderation endpoints guarded by HTTP
+    Basic Auth, but those are for CMS data publishers and are not part of the
+    public consumer surface.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://openpaymentsdata.cms.gov/api/1
+      documented: true
+      note: DKAN metastore, search, datastore query, SQL, and download. All request/response over HTTPS.
+    - protocol: SQL over HTTP
+      scheme: https
+      documented: true
+      note: GET /datastore/sql?query=... returns query result rows as JSON. Still request/response HTTP, not a socket.
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented anywhere on the Open Payments API as of the review date.
+  endpointsConfirmedRest:
+    - GET  https://openpaymentsdata.cms.gov/api/1/metastore/schemas/dataset/items
+    - GET  https://openpaymentsdata.cms.gov/api/1/metastore/schemas/dataset/items/{datasetId}?show-reference-ids
+    - GET  https://openpaymentsdata.cms.gov/api/1/search
+    - GET  https://openpaymentsdata.cms.gov/api/1/datastore/query/{datasetId}/{index}
+    - POST https://openpaymentsdata.cms.gov/api/1/datastore/query/{datasetId}/{index}
+    - POST https://openpaymentsdata.cms.gov/api/1/datastore/query/{distributionId}
+    - GET  https://openpaymentsdata.cms.gov/api/1/datastore/query/{datasetId}/{index}/download?format=csv
+    - GET  https://openpaymentsdata.cms.gov/api/1/datastore/sql?query={sql}
+sources:
+  - url: https://openpaymentsdata.cms.gov/about/api
+    type: Documentation
+    note: Open Payments API landing page; DKAN-based public data API.
+  - url: https://openpaymentsdata.cms.gov/datasets
+    type: APIReference
+    note: Dataset listing (General, Research, Ownership by program year).
+  - url: https://openpaymentsdata.cms.gov/api/1/metastore/schemas/dataset/items
+    type: APIReference
+    note: Live metastore catalog; returned 22 datasets anonymously on the review date.
+  - url: https://openpaymentsdata.cms.gov/api/1/datastore/query/0380bbeb-aea1-58b6-b708-829f92a48202/0
+    type: APIReference
+    note: Live datastore query against 2021 General Payment Data (count 11,558,469 rows), no auth.
+  - url: https://openpaymentsdata.cms.gov/api/1/datastore/sql
+    type: APIReference
+    note: SQL endpoint present; returns HTTP 400 with a missing-query message when called without a query.
+  - url: https://dkan.readthedocs.io/en/latest/user-guide/guide_api.html
+    type: Documentation
+    note: DKAN API reference grounding the metastore/datastore/query/SQL endpoint model.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket protocol surface exists, and Open Payments' public API is
+    request/response REST (metastore, search, datastore query, SQL, download).
+    No AsyncAPI document was created because there is no server-push transport
+    on the API to model; the data is static, batch-published payment records
+    by program year.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

@@ -1,0 +1,59 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: CMS Open Payments
+providerId: open-payments
+created: '2026-07-11'
+modified: '2026-07-11'
+reconciled: false
+tags:
+- Government Data
+- Healthcare
+- Open Data
+- Transparency
+- Free
+- Plans
+description: >-
+  The CMS Open Payments data API is a free public good. It is operated by the
+  U.S. Centers for Medicare and Medicaid Services and funded by the federal
+  government, so there is no pricing, no metering, and no account required to read
+  the data. Every endpoint - metastore catalog, search, datastore query, SQL, and
+  CSV/JSON download - is available anonymously at no cost. The underlying records
+  are U.S. government works in the public domain and may be reused, including
+  commercially, subject to CMS data use guidance.
+notes: >-
+  There is no paid tier and no commercial plan. The only practical cost to a
+  consumer is their own bandwidth and compute for pulling and processing large
+  datasets (some single-year files contain tens of millions of rows). Verify
+  current data use terms on cms.gov.
+sources:
+- https://openpaymentsdata.cms.gov/about/api
+- https://www.cms.gov/priorities/key-initiatives/open-payments
+- https://www.usa.gov/government-works
+plans:
+- id: open-payments-public
+  name: Public Open Data (Free)
+  type: free
+  description: >-
+    Unlimited free, anonymous read access to all Open Payments datasets and the
+    full DKAN API surface. No API key, no registration, no charge.
+  entries:
+  - label: Public API Access
+    name: public_api_access
+    type: usage
+    metric: requests
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: free (public domain U.S. government data)
+    userMultiplied: false
+  elements:
+  - name: Metastore Catalog and Search
+  - name: Datastore Structured Query
+  - name: Datastore SQL Query
+  - name: CSV and JSON Download
+  - name: General, Research, and Ownership Datasets
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

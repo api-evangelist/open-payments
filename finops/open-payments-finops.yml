@@ -1,0 +1,83 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: CMS Open Payments
+providerId: open-payments
+created: '2026-07-11'
+modified: '2026-07-11'
+reconciled: false
+tags:
+- Government Data
+- Healthcare
+- Open Data
+- Transparency
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of CMS Open Payments consumption. There is no vendor invoice - the
+  API is a free, publicly funded U.S. government service with no usage charges,
+  no metering, and no account. The only cost a consuming organization carries is
+  its own side of the pipe: egress bandwidth to pull records, and the compute and
+  storage to ingest, transform, and analyze them. Because single program years can
+  contain tens of millions of rows, the dominant optimization lever is reducing
+  how much data you move - filter server-side, select only the columns you need,
+  and use bulk download for whole-year extracts rather than deep pagination.
+notes: >-
+  No provider-side spend exists to allocate. Track and optimize the consumer-side
+  compute, storage, and network used to ingest and process Open Payments data. All
+  costs sit in your own cloud or on-premise bill, not on a CMS invoice.
+sources:
+- https://openpaymentsdata.cms.gov/about/api
+- https://www.cms.gov/priorities/key-initiatives/open-payments
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Centers for Medicare and Medicaid Services
+serviceCategory: Government Open Data
+billingModel:
+  pricingCategory: Free
+  billingFrequency: None
+  billingCurrency: USD
+  chargeCategories:
+  - Usage
+focusColumns:
+  ServiceName: CMS Open Payments Data API
+  ServiceCategory: Government Open Data
+  ProviderName: Centers for Medicare and Medicaid Services
+  PublisherName: Centers for Medicare and Medicaid Services
+  InvoiceIssuerName: None
+  BillingCurrency: USD
+  ChargeCategory: Usage
+  PricingCategory: Free
+meters:
+- name: consumer_egress
+  description: Bandwidth the consumer uses to pull records and downloads from the API (consumer-side, no CMS charge).
+  unit: bytes
+  aggregation: sum
+  dimensions:
+  - account
+  - dataset
+- name: consumer_compute
+  description: Compute the consumer spends ingesting and processing Open Payments data (consumer-side, no CMS charge).
+  unit: hours
+  aggregation: sum
+  dimensions:
+  - account
+  - workload
+principles:
+- name: Visibility
+  description: Track consumer-side egress and compute for Open Payments ingestion; there is no provider invoice to reconcile.
+- name: Allocation
+  description: Tag ingestion jobs per program year and payment category so consumer-side costs map to internal workloads.
+- name: Optimization
+  description: Filter and select columns server-side, prefer bulk CSV/JSON download for whole-year extracts, and cache locally to avoid re-pulling static historical years.
+- name: Accountability
+  description: Assign owners to Open Payments ingestion pipelines and review their compute/storage footprint against budget.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

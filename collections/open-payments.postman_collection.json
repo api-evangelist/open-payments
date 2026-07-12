@@ -1,0 +1,136 @@
+{
+  "info": {
+    "name": "CMS Open Payments API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Public, free, no-authentication DKAN data API for the CMS Open Payments transparency program (openpaymentsdata.cms.gov). Query general, research, and ownership payment records by program year."
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "https://openpaymentsdata.cms.gov/api/1" },
+    { "key": "datasetId", "value": "0380bbeb-aea1-58b6-b708-829f92a48202" },
+    { "key": "index", "value": "0" }
+  ],
+  "item": [
+    {
+      "name": "Metastore",
+      "item": [
+        {
+          "name": "List all datasets",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/metastore/schemas/dataset/items?page-size=10",
+              "host": ["{{baseUrl}}"],
+              "path": ["metastore", "schemas", "dataset", "items"],
+              "query": [{ "key": "page-size", "value": "10" }]
+            },
+            "description": "Lists DCAT-US metadata for every Open Payments dataset."
+          }
+        },
+        {
+          "name": "Get a dataset with reference ids",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/metastore/schemas/dataset/items/{{datasetId}}?show-reference-ids",
+              "host": ["{{baseUrl}}"],
+              "path": ["metastore", "schemas", "dataset", "items", "{{datasetId}}"],
+              "query": [{ "key": "show-reference-ids", "value": null }]
+            },
+            "description": "Returns one dataset's metadata and resolves its distribution identifier."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Search",
+      "item": [
+        {
+          "name": "Search datasets",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/search?fulltext=general&keyword=2021&page-size=10",
+              "host": ["{{baseUrl}}"],
+              "path": ["search"],
+              "query": [
+                { "key": "fulltext", "value": "general" },
+                { "key": "keyword", "value": "2021" },
+                { "key": "page-size", "value": "10" }
+              ]
+            },
+            "description": "Full-text and faceted search across all Open Payments datasets."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Datastore Query",
+      "item": [
+        {
+          "name": "Query a dataset distribution (GET)",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/datastore/query/{{datasetId}}/{{index}}?limit=10&offset=0",
+              "host": ["{{baseUrl}}"],
+              "path": ["datastore", "query", "{{datasetId}}", "{{index}}"],
+              "query": [
+                { "key": "limit", "value": "10" },
+                { "key": "offset", "value": "0" }
+              ]
+            },
+            "description": "Returns a page of payment rows plus total count, schema, and echoed query."
+          }
+        },
+        {
+          "name": "Query a dataset distribution (POST)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"conditions\": [\n    { \"property\": \"recipient_state\", \"value\": \"CA\", \"operator\": \"=\" }\n  ],\n  \"properties\": [\"covered_recipient_npi\", \"total_amount_of_payment_usdollars\"],\n  \"sorts\": [ { \"property\": \"total_amount_of_payment_usdollars\", \"order\": \"desc\" } ],\n  \"limit\": 25,\n  \"offset\": 0\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/datastore/query/{{datasetId}}/{{index}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["datastore", "query", "{{datasetId}}", "{{index}}"]
+            },
+            "description": "Structured JSON query with conditions, column selection, sorting, and pagination."
+          }
+        },
+        {
+          "name": "Download query results as CSV",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/datastore/query/{{datasetId}}/{{index}}/download?format=csv",
+              "host": ["{{baseUrl}}"],
+              "path": ["datastore", "query", "{{datasetId}}", "{{index}}", "download"],
+              "query": [{ "key": "format", "value": "csv" }]
+            },
+            "description": "Streams query results as a downloadable CSV or JSON file."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Datastore SQL",
+      "item": [
+        {
+          "name": "Run a SQL query",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/datastore/sql?query=[SELECT * FROM resource-id][LIMIT 10];",
+              "host": ["{{baseUrl}}"],
+              "path": ["datastore", "sql"],
+              "query": [{ "key": "query", "value": "[SELECT * FROM resource-id][LIMIT 10];" }]
+            },
+            "description": "Runs a SQL-style query against a datastore resource by id."
+          }
+        }
+      ]
+    }
+  ]
+}

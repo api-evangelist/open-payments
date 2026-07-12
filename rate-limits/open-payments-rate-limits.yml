@@ -1,0 +1,59 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: CMS Open Payments
+providerId: open-payments
+created: '2026-07-11'
+modified: '2026-07-11'
+reconciled: false
+tags:
+- Government Data
+- Healthcare
+- Open Data
+- Rate Limiting
+- Quotas
+description: >-
+  CMS Open Payments does not publish fixed numeric per-key rate limits, because
+  the API requires no key or account. Practical throughput is governed by the
+  page-size / limit parameters on each endpoint (search caps page-size at 100;
+  datastore queries default to a 500-row limit and page via limit and offset) and
+  by fair-use expectations for a shared public federal service. Very large pulls
+  are better served by the CSV/JSON download endpoints or the bulk dataset files
+  than by deep pagination of the query API.
+notes: >-
+  No documented per-minute or per-day request cap exists as of the review date.
+  Consumers should paginate with limit/offset, prefer bulk download for whole-year
+  extracts, honor any 429 or 503 responses with exponential backoff, and avoid
+  hammering the shared endpoint. Numbers here are structural
+  (page-size caps), not published throttles.
+sources:
+- https://openpaymentsdata.cms.gov/about/api
+- https://dkan.readthedocs.io/en/latest/user-guide/guide_api.html
+responseCodes:
+  throttled: 429
+limits:
+- name: Datastore Query Row Limit
+  scope: request
+  metric: rows
+  limit: 500 default per request
+  notes: Set limit and offset to page through results; count in the response gives the full match size.
+- name: Search Page Size
+  scope: request
+  metric: results
+  limit: 100 max per page
+  notes: The /search endpoint caps page-size at 100; use page to paginate.
+- name: Public Request Rate
+  scope: global
+  metric: requests
+  limit: not published
+  notes: No fixed per-client request-rate limit is documented; fair use applies to the shared federal service.
+policies:
+- name: Fair Use
+  description: A shared public federal API. Prefer bulk download endpoints for whole-dataset extracts rather than deep pagination.
+- name: Backoff Strategy
+  description: On 429 or 503 responses, back off exponentially with jitter before retrying.
+- name: Pagination
+  description: Use limit and offset on datastore queries and page / page-size on search and metastore listings.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
