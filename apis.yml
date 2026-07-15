@@ -150,6 +150,8 @@ apis:
     and datastore identifiers), browse data dictionaries, and full-text or faceted
     search across program years and payment categories.
 common:
+- type: AgenticAccess
+  url: agentic-access/open-payments-agentic-access.yml
 - type: Authentication
   url: authentication/open-payments-authentication.yml
 - type: DomainSecurity
