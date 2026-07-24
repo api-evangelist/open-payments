@@ -1,0 +1,61 @@
+openapi: 3.0.3
+info:
+  title: CMS Open Payments Datastore Query Download API
+  description: 'The CMS Open Payments public data API serves the federal transparency program that publishes payments and transfers of value from drug and medical device manufacturers and group purchasing organizations (GPOs) to physicians, non-physician practitioners, and teaching hospitals.
+
+
+    The site at openpaymentsdata.cms.gov is a DKAN open data catalog. All read access is free and requires no authentication or API key. Data is organized as datasets (one per program year and payment category: General, Research, and Ownership and Investment), each backed by a datastore that can be queried with a structured query object, with SQL, or downloaded as CSV or JSON.
+
+
+    This document models the public read surface only: the metastore catalog and search, the datastore structured query endpoints, the SQL query endpoint, and downloads. The DKAN write and moderation endpoints require Basic Authentication and are for CMS data publishers, not public consumers; they are out of scope here.'
+  version: '1.0'
+  contact:
+    name: CMS Open Payments
+    url: https://openpaymentsdata.cms.gov/about/api
+  license:
+    name: U.S. Government Work / Public Domain
+    url: https://www.usa.gov/government-works
+servers:
+- url: https://openpaymentsdata.cms.gov/api/1
+  description: CMS Open Payments public data API (DKAN)
+tags:
+- name: Download
+  description: Bulk CSV or JSON download of query results.
+paths:
+  /datastore/query/{datasetId}/{index}/download:
+    get:
+      operationId: downloadDatastore
+      tags:
+      - Download
+      summary: Download query results
+      description: Stream the results of a datastore query as a file. Use the format query parameter to choose csv or json.
+      parameters:
+      - name: datasetId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The dataset UUID.
+      - name: index
+        in: path
+        required: true
+        schema:
+          type: integer
+          default: 0
+        description: The zero-based distribution index.
+      - name: format
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - csv
+          - json
+          default: csv
+        description: Output file format.
+      responses:
+        '200':
+          description: A CSV or JSON file of the query results.
+          content:
+            text/csv: {}
+            application/json: {}

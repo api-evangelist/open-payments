@@ -1,0 +1,76 @@
+openapi: 3.0.3
+info:
+  title: CMS Open Payments Datastore Query Search API
+  description: 'The CMS Open Payments public data API serves the federal transparency program that publishes payments and transfers of value from drug and medical device manufacturers and group purchasing organizations (GPOs) to physicians, non-physician practitioners, and teaching hospitals.
+
+
+    The site at openpaymentsdata.cms.gov is a DKAN open data catalog. All read access is free and requires no authentication or API key. Data is organized as datasets (one per program year and payment category: General, Research, and Ownership and Investment), each backed by a datastore that can be queried with a structured query object, with SQL, or downloaded as CSV or JSON.
+
+
+    This document models the public read surface only: the metastore catalog and search, the datastore structured query endpoints, the SQL query endpoint, and downloads. The DKAN write and moderation endpoints require Basic Authentication and are for CMS data publishers, not public consumers; they are out of scope here.'
+  version: '1.0'
+  contact:
+    name: CMS Open Payments
+    url: https://openpaymentsdata.cms.gov/about/api
+  license:
+    name: U.S. Government Work / Public Domain
+    url: https://www.usa.gov/government-works
+servers:
+- url: https://openpaymentsdata.cms.gov/api/1
+  description: CMS Open Payments public data API (DKAN)
+tags:
+- name: Search
+  description: Full-text and faceted dataset discovery.
+paths:
+  /search:
+    get:
+      operationId: searchDatasets
+      tags:
+      - Search
+      summary: Search datasets
+      description: Full-text and faceted search across all Open Payments datasets. Filter by keyword (for example a program year like 2021), theme, or free text.
+      parameters:
+      - name: fulltext
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Free-text search string.
+      - name: keyword
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Keyword facet, such as a program year.
+      - name: theme
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Theme / category facet.
+      - name: page-size
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 100
+          default: 10
+        description: Results per page (max 100).
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Page number.
+      responses:
+        '200':
+          description: Search results with a total count and matching datasets.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    type: string
+                  results:
+                    type: object
