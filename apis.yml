@@ -15,7 +15,20 @@ description: >-
   downloads, and a metastore catalog for dataset discovery and metadata. Reads are
   completely free and require no API key. Program Year 2025 alone contains roughly
   17 million published records totaling about 14.67 billion dollars in payments.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: free
+  onboarding: open
+  trial: false
+  try_now: true
+  public: true
+  label: Free · Open access
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/open-payments.png
 tags:
 - Government Data
 - Healthcare
@@ -30,125 +43,96 @@ created: '2026-07-11'
 modified: '2026-07-11'
 specificationVersion: '0.19'
 apis:
-- aid: open-payments:open-payments-general-payments-api
-  name: Open Payments General Payments API
-  tags:
-  - Government Data
-  - Healthcare
-  - Payments
-  - Transparency
-  - General Payments
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://openpaymentsdata.cms.gov/about/api
-  baseURL: https://openpaymentsdata.cms.gov/api/1
-  properties:
-  - url: https://openpaymentsdata.cms.gov/about/api
-    type: Documentation
-  - url: https://openpaymentsdata.cms.gov/datasets
-    type: APIReference
-  - url: openapi/open-payments-openapi.yml
-    type: OpenAPI
-  - url: collections/open-payments.opencollection.json
-    type: OpenCollection
-  - url: collections/open-payments.postman_collection.json
-    type: PostmanCollection
-  description: >-
-    Query general (non-research, non-ownership) payment records - payments and
-    transfers of value from manufacturers and GPOs to covered recipients - via the
-    DKAN datastore query endpoint, one distribution per program year. Supports
-    filtering by recipient NPI, name, state, manufacturer, nature of payment, and
-    amount, plus column selection, sorting, and pagination.
-- aid: open-payments:open-payments-research-payments-api
-  name: Open Payments Research Payments API
-  tags:
-  - Government Data
-  - Healthcare
-  - Clinical Data
-  - Research Payments
-  - Transparency
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://openpaymentsdata.cms.gov/about/api
-  baseURL: https://openpaymentsdata.cms.gov/api/1
-  properties:
-  - url: https://openpaymentsdata.cms.gov/about/api
-    type: Documentation
-  - url: https://openpaymentsdata.cms.gov/datasets
-    type: APIReference
-  - url: openapi/open-payments-openapi.yml
-    type: OpenAPI
-  description: >-
-    Query research payment records - payments and transfers of value made in
-    connection with a formal research agreement or clinical research protocol,
-    including study names, principal investigators, and associated recipients -
-    through the same datastore query interface, one distribution per program year.
-- aid: open-payments:open-payments-ownership-api
-  name: Open Payments Ownership and Investment API
-  tags:
-  - Government Data
-  - Healthcare
-  - Ownership
-  - Transparency
-  - Conflicts of Interest
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://openpaymentsdata.cms.gov/about/api
-  baseURL: https://openpaymentsdata.cms.gov/api/1
-  properties:
-  - url: https://openpaymentsdata.cms.gov/about/api
-    type: Documentation
-  - url: https://openpaymentsdata.cms.gov/datasets
-    type: APIReference
-  - url: openapi/open-payments-openapi.yml
-    type: OpenAPI
-  description: >-
-    Query ownership and investment interest records - physician (and immediate
-    family member) ownership or investment stakes in reporting manufacturers and
-    GPOs - by program year, useful for surfacing potential financial conflicts of
-    interest.
 - aid: open-payments:open-payments-datastore-query-api
-  name: Open Payments Datastore Query API
-  tags:
-  - Government Data
-  - Datastore
-  - SQL
-  - Open Data
-  - Query
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  name: CMS Open Payments Datastore Query API
+  description: Structured query over a dataset distribution.
   humanURL: https://openpaymentsdata.cms.gov/about/api
   baseURL: https://openpaymentsdata.cms.gov/api/1
+  tags:
+  - Datastore Query
   properties:
-  - url: https://openpaymentsdata.cms.gov/about/api
-    type: Documentation
-  - url: openapi/open-payments-openapi.yml
-    type: OpenAPI
-  - url: collections/open-payments.opencollection.json
-    type: OpenCollection
-  description: >-
-    The generic DKAN datastore access layer beneath every Open Payments dataset -
-    a structured query endpoint (conditions, properties, sorts, limit, offset over
-    GET or POST), a SQL query endpoint at /datastore/sql, and CSV/JSON download.
-    Works against any distribution by dataset id and index, or directly by
-    distribution id.
+  - type: OpenAPI
+    url: openapi/open-payments-datastore-query-api-openapi.yml
+  - type: Documentation
+    url: https://openpaymentsdata.cms.gov/about/api
+  - type: APIReference
+    url: https://openpaymentsdata.cms.gov/datasets
+  - type: OpenCollection
+    url: collections/open-payments.opencollection.json
+  - type: PostmanCollection
+    url: collections/open-payments.postman_collection.json
+- aid: open-payments:open-payments-datastore-sql-api
+  name: CMS Open Payments Datastore SQL API
+  description: SQL query over a datastore resource.
+  humanURL: https://openpaymentsdata.cms.gov/about/api
+  baseURL: https://openpaymentsdata.cms.gov/api/1
+  tags:
+  - Datastore SQL
+  properties:
+  - type: OpenAPI
+    url: openapi/open-payments-datastore-sql-api-openapi.yml
+  - type: Documentation
+    url: https://openpaymentsdata.cms.gov/about/api
+  - type: APIReference
+    url: https://openpaymentsdata.cms.gov/datasets
+  - type: OpenCollection
+    url: collections/open-payments.opencollection.json
+  - type: PostmanCollection
+    url: collections/open-payments.postman_collection.json
+- aid: open-payments:open-payments-download-api
+  name: CMS Open Payments Download API
+  description: Bulk CSV or JSON download of query results.
+  humanURL: https://openpaymentsdata.cms.gov/about/api
+  baseURL: https://openpaymentsdata.cms.gov/api/1
+  tags:
+  - Download
+  properties:
+  - type: OpenAPI
+    url: openapi/open-payments-download-api-openapi.yml
+  - type: Documentation
+    url: https://openpaymentsdata.cms.gov/about/api
+  - type: APIReference
+    url: https://openpaymentsdata.cms.gov/datasets
+  - type: OpenCollection
+    url: collections/open-payments.opencollection.json
+  - type: PostmanCollection
+    url: collections/open-payments.postman_collection.json
 - aid: open-payments:open-payments-metastore-api
-  name: Open Payments Metastore and Search API
-  tags:
-  - Government Data
-  - Metadata
-  - Catalog
-  - Open Data
-  - Discovery
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  name: CMS Open Payments Metastore API
+  description: DCAT-US dataset catalog and metadata.
   humanURL: https://openpaymentsdata.cms.gov/about/api
   baseURL: https://openpaymentsdata.cms.gov/api/1
+  tags:
+  - Metastore
   properties:
-  - url: https://openpaymentsdata.cms.gov/about/api
-    type: Documentation
-  - url: openapi/open-payments-openapi.yml
-    type: OpenAPI
-  description: >-
-    The DCAT-US metastore catalog and search over all Open Payments datasets -
-    list and retrieve dataset metadata (with reference ids to resolve distribution
-    and datastore identifiers), browse data dictionaries, and full-text or faceted
-    search across program years and payment categories.
+  - type: OpenAPI
+    url: openapi/open-payments-metastore-api-openapi.yml
+  - type: Documentation
+    url: https://openpaymentsdata.cms.gov/about/api
+  - type: APIReference
+    url: https://openpaymentsdata.cms.gov/datasets
+  - type: OpenCollection
+    url: collections/open-payments.opencollection.json
+  - type: PostmanCollection
+    url: collections/open-payments.postman_collection.json
+- aid: open-payments:open-payments-search-api
+  name: CMS Open Payments Search API
+  description: Full-text and faceted dataset discovery.
+  humanURL: https://openpaymentsdata.cms.gov/about/api
+  baseURL: https://openpaymentsdata.cms.gov/api/1
+  tags:
+  - Search
+  properties:
+  - type: OpenAPI
+    url: openapi/open-payments-search-api-openapi.yml
+  - type: Documentation
+    url: https://openpaymentsdata.cms.gov/about/api
+  - type: APIReference
+    url: https://openpaymentsdata.cms.gov/datasets
+  - type: OpenCollection
+    url: collections/open-payments.opencollection.json
+  - type: PostmanCollection
+    url: collections/open-payments.postman_collection.json
 common:
 - type: AgenticAccess
   url: agentic-access/open-payments-agentic-access.yml
