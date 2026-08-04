@@ -1,0 +1,22 @@
+{
+  "provider": "open-payments",
+  "sources": [
+    "open-payments-datastore-query-api-openapi.yml",
+    "open-payments-datastore-sql-api-openapi.yml",
+    "open-payments-download-api-openapi.yml",
+    "open-payments-metastore-api-openapi.yml",
+    "open-payments-search-api-openapi.yml"
+  ],
+  "outputs": [
+    "open-payments-datastore-query-api-openapi.yml",
+    "open-payments-datastore-sql-api-openapi.yml",
+    "open-payments-download-api-openapi.yml",
+    "open-payments-metastore-api-openapi.yml",
+    "open-payments-search-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
