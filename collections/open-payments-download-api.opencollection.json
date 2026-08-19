@@ -1,0 +1,49 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "CMS Open Payments Datastore Query Download API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Download",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Download query results",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://openpaymentsdata.cms.gov/api/1/datastore/query/:datasetId/:index/download",
+            "params": [
+              {
+                "name": "datasetId",
+                "value": "",
+                "type": "path",
+                "description": "The dataset UUID."
+              },
+              {
+                "name": "index",
+                "value": "",
+                "type": "path",
+                "description": "The zero-based distribution index."
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Output file format."
+              }
+            ]
+          },
+          "docs": "Stream the results of a datastore query as a file. Use the format query parameter to choose csv or json."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

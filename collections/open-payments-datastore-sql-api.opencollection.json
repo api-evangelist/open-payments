@@ -1,0 +1,43 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "CMS Open Payments Datastore Query Datastore SQL API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Datastore SQL",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Run a SQL query",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://openpaymentsdata.cms.gov/api/1/datastore/sql",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "The SQL query string over a datastore resource."
+              },
+              {
+                "name": "show_db_columns",
+                "value": "",
+                "type": "query",
+                "description": "Include the internal datastore column names in the response."
+              }
+            ]
+          },
+          "docs": "Run a SQL-style query against a datastore resource. The query references a datastore table by its resource id (for example [SELECT * FROM resource-id][WHERE ...][LIMIT 10];). No authentication required. Returns HTTP 400 when the query parameter is missing."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

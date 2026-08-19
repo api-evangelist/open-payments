@@ -1,0 +1,152 @@
+{
+  "item": [
+    {
+      "id": "03a7eaba-1264-4953-bbbb-b863b8372f9d",
+      "name": "Download",
+      "description": {
+        "content": "Bulk CSV or JSON download of query results.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1d17141a-c102-4883-a5cb-751ed7ed1aa5",
+          "name": "Download query results",
+          "request": {
+            "name": "Download query results",
+            "description": {
+              "content": "Stream the results of a datastore query as a file. Use the format query parameter to choose csv or json.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "datastore",
+                "query",
+                ":datasetId",
+                ":index",
+                "download"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "csv",
+                  "description": "Output file format."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "datasetId",
+                  "description": "(Required) The dataset UUID."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "0",
+                  "key": "index",
+                  "description": "(Required) The zero-based distribution index."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/csv"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8b9ae7c4-b7dc-4946-9320-5733dffcd9cf",
+              "name": "A CSV or JSON file of the query results.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "datastore",
+                    "query",
+                    ":datasetId",
+                    ":index",
+                    "download"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "csv"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "datasetId",
+                      "description": "(Required) The dataset UUID."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "0",
+                      "key": "index",
+                      "description": "(Required) The zero-based distribution index."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/csv"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://openpaymentsdata.cms.gov/api/1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "c3312477-fe5d-4333-88d4-3834d03b7c5c",
+    "name": "CMS Open Payments Datastore Query Download API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The CMS Open Payments public data API serves the federal transparency program that publishes payments and transfers of value from drug and medical device manufacturers and group purchasing organizations (GPOs) to physicians, non-physician practitioners, and teaching hospitals.\n\nThe site at openpaymentsdata.cms.gov is a DKAN open data catalog. All read access is free and requires no authentication or API key. Data is organized as datasets (one per program year and payment category: General, Research, and Ownership and Investment), each backed by a datastore that can be queried with a structured query object, with SQL, or downloaded as CSV or JSON.\n\nThis document models the public read surface only: the metastore catalog and search, the datastore structured query endpoints, the SQL query endpoint, and downloads. The DKAN write and moderation endpoints require Basic Authentication and are for CMS data publishers, not public consumers; they are out of scope here.\n\nContact Support:\n Name: CMS Open Payments",
+      "type": "text/plain"
+    }
+  }
+}

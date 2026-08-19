@@ -1,0 +1,288 @@
+{
+  "item": [
+    {
+      "id": "242bfd67-c5b1-4c64-be88-a9ac3d08cf23",
+      "name": "Metastore",
+      "description": {
+        "content": "DCAT-US dataset catalog and metadata.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0d4d74dd-425c-4555-8f88-0d4b4d2afe17",
+          "name": "List all datasets",
+          "request": {
+            "name": "List all datasets",
+            "description": {
+              "content": "Returns the DCAT-US metadata for every Open Payments dataset (each program year of General, Research, and Ownership data). No authentication required.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "metastore",
+                "schemas",
+                "dataset",
+                "items"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page-size",
+                  "value": "10",
+                  "description": "Number of dataset items to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "Page number for pagination."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cdb4f53c-5001-4e87-91c1-fae5befe8f55",
+              "name": "An array of dataset metadata objects.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metastore",
+                    "schemas",
+                    "dataset",
+                    "items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page-size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"title\": \"string\",\n    \"description\": \"string\",\n    \"accessLevel\": \"string\",\n    \"keyword\": [\n      \"string\",\n      \"string\"\n    ],\n    \"contactPoint\": {},\n    \"distribution\": [\n      {\n        \"identifier\": \"string\",\n        \"title\": \"string\",\n        \"format\": \"string\",\n        \"downloadURL\": \"string\"\n      },\n      {\n        \"identifier\": \"string\",\n        \"title\": \"string\",\n        \"format\": \"string\",\n        \"downloadURL\": \"string\"\n      }\n    ]\n  },\n  {\n    \"title\": \"string\",\n    \"description\": \"string\",\n    \"accessLevel\": \"string\",\n    \"keyword\": [\n      \"string\",\n      \"string\"\n    ],\n    \"contactPoint\": {},\n    \"distribution\": [\n      {\n        \"identifier\": \"string\",\n        \"title\": \"string\",\n        \"format\": \"string\",\n        \"downloadURL\": \"string\"\n      },\n      {\n        \"identifier\": \"string\",\n        \"title\": \"string\",\n        \"format\": \"string\",\n        \"downloadURL\": \"string\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "79b2ea0e-61c3-4afd-b847-a4d0ed3b4890",
+          "name": "Get one dataset's metadata",
+          "request": {
+            "name": "Get one dataset's metadata",
+            "description": {
+              "content": "Returns the DCAT-US metadata for a single dataset. Pass show-reference-ids to resolve the distribution and datastore identifiers needed to query the data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "metastore",
+                "schemas",
+                "dataset",
+                "items",
+                ":datasetId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "show-reference-ids",
+                  "value": "<boolean>",
+                  "description": "When present, expands distribution reference identifiers."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "datasetId",
+                  "description": "(Required) The dataset UUID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a792ee1c-d91d-436f-aace-970373a215a5",
+              "name": "A dataset metadata object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metastore",
+                    "schemas",
+                    "dataset",
+                    "items",
+                    ":datasetId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "show-reference-ids",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "datasetId",
+                      "description": "(Required) The dataset UUID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"string\",\n  \"description\": \"string\",\n  \"accessLevel\": \"string\",\n  \"keyword\": [\n    \"string\",\n    \"string\"\n  ],\n  \"contactPoint\": {},\n  \"distribution\": [\n    {\n      \"identifier\": \"string\",\n      \"title\": \"string\",\n      \"format\": \"string\",\n      \"downloadURL\": \"string\"\n    },\n    {\n      \"identifier\": \"string\",\n      \"title\": \"string\",\n      \"format\": \"string\",\n      \"downloadURL\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d06eb254-b573-44de-80a8-dd441fbebcf6",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metastore",
+                    "schemas",
+                    "dataset",
+                    "items",
+                    ":datasetId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "show-reference-ids",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "datasetId",
+                      "description": "(Required) The dataset UUID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"status\": 3474,\n  \"timestamp\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://openpaymentsdata.cms.gov/api/1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "9d2c14e4-42dc-4f37-85f7-4e5500d24cdb",
+    "name": "CMS Open Payments Datastore Query Metastore API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The CMS Open Payments public data API serves the federal transparency program that publishes payments and transfers of value from drug and medical device manufacturers and group purchasing organizations (GPOs) to physicians, non-physician practitioners, and teaching hospitals.\n\nThe site at openpaymentsdata.cms.gov is a DKAN open data catalog. All read access is free and requires no authentication or API key. Data is organized as datasets (one per program year and payment category: General, Research, and Ownership and Investment), each backed by a datastore that can be queried with a structured query object, with SQL, or downloaded as CSV or JSON.\n\nThis document models the public read surface only: the metastore catalog and search, the datastore structured query endpoints, the SQL query endpoint, and downloads. The DKAN write and moderation endpoints require Basic Authentication and are for CMS data publishers, not public consumers; they are out of scope here.\n\nContact Support:\n Name: CMS Open Payments",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,119 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "CMS Open Payments Datastore Query API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Datastore Query",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Query a dataset distribution (GET)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://openpaymentsdata.cms.gov/api/1/datastore/query/:datasetId/:index",
+            "params": [
+              {
+                "name": "datasetId",
+                "value": "",
+                "type": "path",
+                "description": "The dataset UUID."
+              },
+              {
+                "name": "index",
+                "value": "",
+                "type": "path",
+                "description": "The zero-based distribution index within the dataset."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of rows to return."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of rows to skip for pagination."
+              },
+              {
+                "name": "conditions",
+                "value": "",
+                "type": "query",
+                "description": "Filter conditions (property, value, operator)."
+              },
+              {
+                "name": "properties",
+                "value": "",
+                "type": "query",
+                "description": "Subset of columns to return."
+              }
+            ]
+          },
+          "docs": "Query the rows of a dataset's distribution by dataset id and distribution index (usually 0). Filtering, column selection, sorting, and pagination are expressed as query-string parameters. No authentication required."
+        },
+        {
+          "info": {
+            "name": "Query a dataset distribution (POST)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://openpaymentsdata.cms.gov/api/1/datastore/query/:datasetId/:index",
+            "params": [
+              {
+                "name": "datasetId",
+                "value": "",
+                "type": "path",
+                "description": "The dataset UUID."
+              },
+              {
+                "name": "index",
+                "value": "",
+                "type": "path",
+                "description": "The zero-based distribution index within the dataset."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Query the rows of a dataset's distribution by dataset id and distribution index using a structured JSON query body. Preferred for complex filters."
+        },
+        {
+          "info": {
+            "name": "Query a distribution directly",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://openpaymentsdata.cms.gov/api/1/datastore/query/:distributionId",
+            "params": [
+              {
+                "name": "distributionId",
+                "value": "",
+                "type": "path",
+                "description": "The distribution (datastore resource) identifier."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Query a datastore resource directly by its distribution identifier (resolved from dataset metadata with show-reference-ids). The same query body can join across multiple distributions."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

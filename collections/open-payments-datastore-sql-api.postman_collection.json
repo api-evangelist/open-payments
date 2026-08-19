@@ -1,0 +1,165 @@
+{
+  "item": [
+    {
+      "id": "84758327-2575-47f9-8b8c-0495b5bbe9b0",
+      "name": "Datastore SQL",
+      "description": {
+        "content": "SQL query over a datastore resource.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "119bc70a-9fbd-4cc0-a70a-d05a10efe54e",
+          "name": "Run a SQL query",
+          "request": {
+            "name": "Run a SQL query",
+            "description": {
+              "content": "Run a SQL-style query against a datastore resource. The query references a datastore table by its resource id (for example [SELECT * FROM resource-id][WHERE ...][LIMIT 10];). No authentication required. Returns HTTP 400 when the query parameter is missing.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "datastore",
+                "sql"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>",
+                  "description": "(Required) The SQL query string over a datastore resource."
+                },
+                {
+                  "disabled": false,
+                  "key": "show_db_columns",
+                  "value": "<boolean>",
+                  "description": "Include the internal datastore column names in the response."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c3c4de2e-e22b-4bd1-adda-47ecdac2c85b",
+              "name": "An array of result rows.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "datastore",
+                    "sql"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "show_db_columns",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "84fd8616-4595-4227-9dd4-85266ee8d177",
+              "name": "Missing or invalid query parameter.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "datastore",
+                    "sql"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "show_db_columns",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://openpaymentsdata.cms.gov/api/1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "54c47d34-fdc4-4b70-9d38-a43141660d53",
+    "name": "CMS Open Payments Datastore Query Datastore SQL API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The CMS Open Payments public data API serves the federal transparency program that publishes payments and transfers of value from drug and medical device manufacturers and group purchasing organizations (GPOs) to physicians, non-physician practitioners, and teaching hospitals.\n\nThe site at openpaymentsdata.cms.gov is a DKAN open data catalog. All read access is free and requires no authentication or API key. Data is organized as datasets (one per program year and payment category: General, Research, and Ownership and Investment), each backed by a datastore that can be queried with a structured query object, with SQL, or downloaded as CSV or JSON.\n\nThis document models the public read surface only: the metastore catalog and search, the datastore structured query endpoints, the SQL query endpoint, and downloads. The DKAN write and moderation endpoints require Basic Authentication and are for CMS data publishers, not public consumers; they are out of scope here.\n\nContact Support:\n Name: CMS Open Payments",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,418 @@
+{
+  "item": [
+    {
+      "id": "9e6d534c-1e13-4aea-a2f0-d41773bd201a",
+      "name": "Datastore Query",
+      "description": {
+        "content": "Structured query over a dataset distribution.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1e21ff68-bddc-4fb7-a026-bd6045f50b06",
+          "name": "Query a dataset distribution (GET)",
+          "request": {
+            "name": "Query a dataset distribution (GET)",
+            "description": {
+              "content": "Query the rows of a dataset's distribution by dataset id and distribution index (usually 0). Filtering, column selection, sorting, and pagination are expressed as query-string parameters. No authentication required.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "datastore",
+                "query",
+                ":datasetId",
+                ":index"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "500",
+                  "description": "Maximum number of rows to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Number of rows to skip for pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "conditions",
+                  "value": "<string>",
+                  "description": "Filter conditions (property, value, operator)."
+                },
+                {
+                  "disabled": false,
+                  "key": "properties",
+                  "value": "<string>",
+                  "description": "Subset of columns to return."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "datasetId",
+                  "description": "(Required) The dataset UUID."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "0",
+                  "key": "index",
+                  "description": "(Required) The zero-based distribution index within the dataset."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "78a64249-28a9-4eb2-bb33-b58124ee1eca",
+              "name": "A page of matching rows plus row count, schema, and echoed query.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "datastore",
+                    "query",
+                    ":datasetId",
+                    ":index"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "500"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "conditions",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "properties",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "datasetId",
+                      "description": "(Required) The dataset UUID."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "0",
+                      "key": "index",
+                      "description": "(Required) The zero-based distribution index within the dataset."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 4649,\n  \"schema\": {},\n  \"query\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "493d9ef8-0ce8-4268-b2cd-18fb0acb057d",
+          "name": "Query a dataset distribution (POST)",
+          "request": {
+            "name": "Query a dataset distribution (POST)",
+            "description": {
+              "content": "Query the rows of a dataset's distribution by dataset id and distribution index using a structured JSON query body. Preferred for complex filters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "datastore",
+                "query",
+                ":datasetId",
+                ":index"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "datasetId",
+                  "description": "(Required) The dataset UUID."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "0",
+                  "key": "index",
+                  "description": "(Required) The zero-based distribution index within the dataset."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"conditions\": [\n    {\n      \"property\": \"<string>\",\n      \"value\": \"<string>\",\n      \"operator\": \"<string>\"\n    },\n    {\n      \"property\": \"<string>\",\n      \"value\": \"<string>\",\n      \"operator\": \"<string>\"\n    }\n  ],\n  \"properties\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"sorts\": [\n    {\n      \"property\": \"<string>\",\n      \"order\": \"<string>\"\n    },\n    {\n      \"property\": \"<string>\",\n      \"order\": \"<string>\"\n    }\n  ],\n  \"limit\": 500,\n  \"offset\": 0\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4d2dd7c2-3d8c-4f4c-946b-e53a487a57f7",
+              "name": "A page of matching rows plus row count, schema, and echoed query.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "datastore",
+                    "query",
+                    ":datasetId",
+                    ":index"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "datasetId",
+                      "description": "(Required) The dataset UUID."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "0",
+                      "key": "index",
+                      "description": "(Required) The zero-based distribution index within the dataset."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"conditions\": [\n    {\n      \"property\": \"<string>\",\n      \"value\": \"<string>\",\n      \"operator\": \"<string>\"\n    },\n    {\n      \"property\": \"<string>\",\n      \"value\": \"<string>\",\n      \"operator\": \"<string>\"\n    }\n  ],\n  \"properties\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"sorts\": [\n    {\n      \"property\": \"<string>\",\n      \"order\": \"<string>\"\n    },\n    {\n      \"property\": \"<string>\",\n      \"order\": \"<string>\"\n    }\n  ],\n  \"limit\": 500,\n  \"offset\": 0\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 1356,\n  \"schema\": {},\n  \"query\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "93618d1b-c242-4501-b7a1-9faceceaf2ee",
+          "name": "Query a distribution directly",
+          "request": {
+            "name": "Query a distribution directly",
+            "description": {
+              "content": "Query a datastore resource directly by its distribution identifier (resolved from dataset metadata with show-reference-ids). The same query body can join across multiple distributions.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "datastore",
+                "query",
+                ":distributionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "distributionId",
+                  "description": "(Required) The distribution (datastore resource) identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"conditions\": [\n    {\n      \"property\": \"<string>\",\n      \"value\": \"<string>\",\n      \"operator\": \"<string>\"\n    },\n    {\n      \"property\": \"<string>\",\n      \"value\": \"<string>\",\n      \"operator\": \"<string>\"\n    }\n  ],\n  \"properties\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"sorts\": [\n    {\n      \"property\": \"<string>\",\n      \"order\": \"<string>\"\n    },\n    {\n      \"property\": \"<string>\",\n      \"order\": \"<string>\"\n    }\n  ],\n  \"limit\": 500,\n  \"offset\": 0\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5d97e8c1-e285-4e77-9f70-ef4d26b362df",
+              "name": "A page of matching rows.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "datastore",
+                    "query",
+                    ":distributionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "distributionId",
+                      "description": "(Required) The distribution (datastore resource) identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"conditions\": [\n    {\n      \"property\": \"<string>\",\n      \"value\": \"<string>\",\n      \"operator\": \"<string>\"\n    },\n    {\n      \"property\": \"<string>\",\n      \"value\": \"<string>\",\n      \"operator\": \"<string>\"\n    }\n  ],\n  \"properties\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"sorts\": [\n    {\n      \"property\": \"<string>\",\n      \"order\": \"<string>\"\n    },\n    {\n      \"property\": \"<string>\",\n      \"order\": \"<string>\"\n    }\n  ],\n  \"limit\": 500,\n  \"offset\": 0\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 1356,\n  \"schema\": {},\n  \"query\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://openpaymentsdata.cms.gov/api/1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "3da0749f-b060-4c72-aec7-7684e140f81a",
+    "name": "CMS Open Payments Datastore Query API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The CMS Open Payments public data API serves the federal transparency program that publishes payments and transfers of value from drug and medical device manufacturers and group purchasing organizations (GPOs) to physicians, non-physician practitioners, and teaching hospitals.\n\nThe site at openpaymentsdata.cms.gov is a DKAN open data catalog. All read access is free and requires no authentication or API key. Data is organized as datasets (one per program year and payment category: General, Research, and Ownership and Investment), each backed by a datastore that can be queried with a structured query object, with SQL, or downloaded as CSV or JSON.\n\nThis document models the public read surface only: the metastore catalog and search, the datastore structured query endpoints, the SQL query endpoint, and downloads. The DKAN write and moderation endpoints require Basic Authentication and are for CMS data publishers, not public consumers; they are out of scope here.\n\nContact Support:\n Name: CMS Open Payments",
+      "type": "text/plain"
+    }
+  }
+}

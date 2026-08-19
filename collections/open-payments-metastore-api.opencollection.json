@@ -1,0 +1,68 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "CMS Open Payments Datastore Query Metastore API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Metastore",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all datasets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://openpaymentsdata.cms.gov/api/1/metastore/schemas/dataset/items",
+            "params": [
+              {
+                "name": "page-size",
+                "value": "",
+                "type": "query",
+                "description": "Number of dataset items to return."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination."
+              }
+            ]
+          },
+          "docs": "Returns the DCAT-US metadata for every Open Payments dataset (each program year of General, Research, and Ownership data). No authentication required."
+        },
+        {
+          "info": {
+            "name": "Get one dataset's metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://openpaymentsdata.cms.gov/api/1/metastore/schemas/dataset/items/:datasetId",
+            "params": [
+              {
+                "name": "datasetId",
+                "value": "",
+                "type": "path",
+                "description": "The dataset UUID."
+              },
+              {
+                "name": "show-reference-ids",
+                "value": "",
+                "type": "query",
+                "description": "When present, expands distribution reference identifiers."
+              }
+            ]
+          },
+          "docs": "Returns the DCAT-US metadata for a single dataset. Pass show-reference-ids to resolve the distribution and datastore identifiers needed to query the data."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

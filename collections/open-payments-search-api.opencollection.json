@@ -1,0 +1,61 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "CMS Open Payments Datastore Query Search API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Search",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search datasets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://openpaymentsdata.cms.gov/api/1/search",
+            "params": [
+              {
+                "name": "fulltext",
+                "value": "",
+                "type": "query",
+                "description": "Free-text search string."
+              },
+              {
+                "name": "keyword",
+                "value": "",
+                "type": "query",
+                "description": "Keyword facet, such as a program year."
+              },
+              {
+                "name": "theme",
+                "value": "",
+                "type": "query",
+                "description": "Theme / category facet."
+              },
+              {
+                "name": "page-size",
+                "value": "",
+                "type": "query",
+                "description": "Results per page (max 100)."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number."
+              }
+            ]
+          },
+          "docs": "Full-text and faceted search across all Open Payments datasets. Filter by keyword (for example a program year like 2021), theme, or free text."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
