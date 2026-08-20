@@ -85,6 +85,8 @@ apis:
   humanURL: https://openpaymentsdata.cms.gov/about/api
   baseURL: https://openpaymentsdata.cms.gov/api/1
   tags:
+  - Downloads
+  tags_raw:
   - Download
   properties:
   - type: OpenAPI
