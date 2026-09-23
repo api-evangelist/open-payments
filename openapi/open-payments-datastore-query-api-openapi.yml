@@ -1,13 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: CMS Open Payments Datastore Query API
-  description: 'The CMS Open Payments public data API serves the federal transparency program that publishes payments and transfers of value from drug and medical device manufacturers and group purchasing organizations (GPOs) to physicians, non-physician practitioners, and teaching hospitals.
-
-
-    The site at openpaymentsdata.cms.gov is a DKAN open data catalog. All read access is free and requires no authentication or API key. Data is organized as datasets (one per program year and payment category: General, Research, and Ownership and Investment), each backed by a datastore that can be queried with a structured query object, with SQL, or downloaded as CSV or JSON.
-
-
-    This document models the public read surface only: the metastore catalog and search, the datastore structured query endpoints, the SQL query endpoint, and downloads. The DKAN write and moderation endpoints require Basic Authentication and are for CMS data publishers, not public consumers; they are out of scope here.'
+  description: The CMS Open Payments public data API serves the federal transparency program that publishes payments and transfers of value from drug and medical device manufacturers and group purchasing organizations (GPOs) to physicians, non-physician practitioners, and teaching hospitals.
   version: '1.0'
   contact:
     name: CMS Open Payments
@@ -138,6 +132,18 @@ paths:
                 $ref: '#/components/schemas/QueryResult'
 components:
   schemas:
+    Condition:
+      type: object
+      properties:
+        property:
+          type: string
+          description: Column name to filter on.
+        value:
+          type: string
+          description: Value to compare against.
+        operator:
+          type: string
+          description: Comparison operator (=, <>, >, <, >=, <=, like, in, between).
     Query:
       type: object
       description: A structured datastore query.
@@ -169,18 +175,6 @@ components:
         offset:
           type: integer
           default: 0
-    Condition:
-      type: object
-      properties:
-        property:
-          type: string
-          description: Column name to filter on.
-        value:
-          type: string
-          description: Value to compare against.
-        operator:
-          type: string
-          description: Comparison operator (=, <>, >, <, >=, <=, like, in, between).
     QueryResult:
       type: object
       properties:
