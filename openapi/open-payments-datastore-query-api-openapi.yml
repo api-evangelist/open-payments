@@ -132,18 +132,6 @@ paths:
                 $ref: '#/components/schemas/QueryResult'
 components:
   schemas:
-    Condition:
-      type: object
-      properties:
-        property:
-          type: string
-          description: Column name to filter on.
-        value:
-          type: string
-          description: Value to compare against.
-        operator:
-          type: string
-          description: Comparison operator (=, <>, >, <, >=, <=, like, in, between).
     Query:
       type: object
       description: A structured datastore query.
@@ -192,3 +180,15 @@ components:
         query:
           type: object
           description: The query as interpreted by the server.
+    Condition:
+      type: object
+      properties:
+        property:
+          type: string
+          description: Column name to filter on.
+        value:
+          type: string
+          description: Value to compare against.
+        operator:
+          type: string
+          description: Comparison operator (=, <>, >, <, >=, <=, like, in, between).

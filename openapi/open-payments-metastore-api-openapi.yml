@@ -77,18 +77,14 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
-    Distribution:
+    Error:
       type: object
-      description: A downloadable / queryable resource within a dataset.
       properties:
-        identifier:
+        message:
           type: string
-          description: The distribution (datastore resource) identifier.
-        title:
-          type: string
-        format:
-          type: string
-        downloadURL:
+        status:
+          type: integer
+        timestamp:
           type: string
     Dataset:
       type: object
@@ -110,14 +106,18 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Distribution'
-    Error:
+    Distribution:
       type: object
+      description: A downloadable / queryable resource within a dataset.
       properties:
-        message:
+        identifier:
           type: string
-        status:
-          type: integer
-        timestamp:
+          description: The distribution (datastore resource) identifier.
+        title:
+          type: string
+        format:
+          type: string
+        downloadURL:
           type: string
   responses:
     NotFound:
