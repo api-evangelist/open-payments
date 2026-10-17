@@ -76,6 +76,13 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
     Error:
       type: object
@@ -85,6 +92,19 @@ components:
         status:
           type: integer
         timestamp:
+          type: string
+    Distribution:
+      type: object
+      description: A downloadable / queryable resource within a dataset.
+      properties:
+        identifier:
+          type: string
+          description: The distribution (datastore resource) identifier.
+        title:
+          type: string
+        format:
+          type: string
+        downloadURL:
           type: string
     Dataset:
       type: object
@@ -106,23 +126,3 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Distribution'
-    Distribution:
-      type: object
-      description: A downloadable / queryable resource within a dataset.
-      properties:
-        identifier:
-          type: string
-          description: The distribution (datastore resource) identifier.
-        title:
-          type: string
-        format:
-          type: string
-        downloadURL:
-          type: string
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'

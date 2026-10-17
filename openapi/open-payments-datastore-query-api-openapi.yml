@@ -132,6 +132,23 @@ paths:
                 $ref: '#/components/schemas/QueryResult'
 components:
   schemas:
+    QueryResult:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            type: object
+          description: The matching rows.
+        count:
+          type: integer
+          description: Total number of rows matching the query.
+        schema:
+          type: object
+          description: Column schema for the queried resource.
+        query:
+          type: object
+          description: The query as interpreted by the server.
     Query:
       type: object
       description: A structured datastore query.
@@ -163,23 +180,6 @@ components:
         offset:
           type: integer
           default: 0
-    QueryResult:
-      type: object
-      properties:
-        results:
-          type: array
-          items:
-            type: object
-          description: The matching rows.
-        count:
-          type: integer
-          description: Total number of rows matching the query.
-        schema:
-          type: object
-          description: Column schema for the queried resource.
-        query:
-          type: object
-          description: The query as interpreted by the server.
     Condition:
       type: object
       properties:
