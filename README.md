@@ -1,4 +1,4 @@
-# CMS Open Payments (open-payments)
+# CMS Open Payments
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,109 +64,125 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-CMS Open Payments is the U.S. federal transparency program, run by the Centers for Medicare and Medicaid Services (CMS), that publishes payments and transfers of value made by drug and medical device manufacturers and group purchasing organizations (GPOs) to physicians, non-physician practitioners, and teaching hospitals. The public data site at [openpaymentsdata.cms.gov](https://openpaymentsdata.cms.gov) is a DKAN open data catalog that exposes a **free, open, no-authentication REST API** under `/api/1` for querying general payments, research payments, and ownership and investment records by program year.
+CMS Open Payments is the U.S. federal transparency program (run by the Centers for Medicare and Medicaid Services) that publishes payments and transfers of value made by drug and medical device manufacturers and group purchasing organizations to physicians, non-physician practitioners, and teaching hospitals. The public data site at openpaymentsdata.cms.gov exposes a free, open, no-authentication REST API (a DKAN-style data catalog under /api/1) that lets developers query general payments, research payments, and ownership and investment records by program year. The API offers a structured datastore query interface (filter, select, sort, paginate), a SQL query endpoint, CSV and JSON downloads, and a metastore catalog for dataset discovery and metadata. Reads are completely free and require no API key. Program Year 2025 alone contains roughly 17 million published records totaling about 14.67 billion dollars in payments.
 
-**Access model:** Read access is completely free. There is **no API key, no token, and no account required** — every endpoint (metastore catalog, search, datastore query, SQL, and CSV/JSON download) was confirmed reachable anonymously over HTTPS on the review date. The records are U.S. government works in the public domain. (The underlying DKAN platform has write/moderation endpoints behind HTTP Basic Auth, but those are for CMS data publishers, not public consumers.)
+**Areas:** Government Data · Healthcare · Open Data · Transparency · Payments · Clinical Data · Physicians · Open Government · Public Sector
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/open-payments/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/open-payments/refs/heads/main/apis.yml)
+## CMS Open Payments on APIs.io
 
-## Tags
+Everything profiled for CMS Open Payments is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/open-payments/](https://apis.io/providers/open-payments/)** — or go straight to one of the APIs or properties below.
 
-- Government Data
-- Healthcare
-- Open Data
-- Transparency
-- Payments
-- Clinical Data
+### APIs (5)
 
-## Timestamps
+- [CMS Open Payments Datastore Query API](https://apis.io/apis/open-payments/open-payments-datastore-query-api/) — Structured query over a dataset distribution.
+- [CMS Open Payments Datastore SQL API](https://apis.io/apis/open-payments/open-payments-datastore-sql-api/) — SQL query over a datastore resource.
+- [CMS Open Payments Download API](https://apis.io/apis/open-payments/open-payments-download-api/) — Bulk CSV or JSON download of query results.
+- [CMS Open Payments Metastore API](https://apis.io/apis/open-payments/open-payments-metastore-api/) — DCAT-US dataset catalog and metadata.
+- [CMS Open Payments Search API](https://apis.io/apis/open-payments/open-payments-search-api/) — Full-text and faceted dataset discovery.
 
-- **Created:** 2026-07-11
-- **Modified:** 2026-07-11
+### Published properties
 
-## Base URL
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-`https://openpaymentsdata.cms.gov/api/1`
+#### Agentic access (1)
 
-## APIs
+Which operations an agent can call, which act, and which need a human in the loop.
 
-### Open Payments General Payments API
+- [Open Payments Agentic Access](https://apis.io/agentic-access/open-payments/open-payments-agentic-access/)
 
-Query general (non-research, non-ownership) payment records — payments and transfers of value from manufacturers and GPOs to covered recipients — via the DKAN datastore query endpoint, one distribution per program year. Supports filtering by recipient NPI, name, state, manufacturer, nature of payment, and amount, plus column selection, sorting, and pagination.
+#### Collections (6)
 
-- **Human URL:** [https://openpaymentsdata.cms.gov/about/api](https://openpaymentsdata.cms.gov/about/api)
-- **Base URL:** `https://openpaymentsdata.cms.gov/api/1`
+Postman and Open Collection request collections.
 
-### Open Payments Research Payments API
+- [CMS Open Payments API](https://apis.io/collections/open-payments/open-open-payments/)
+- [CMS Open Payments Datastore Query API](https://apis.io/collections/open-payments/open-open-payments-datastore-query-api/)
+- [CMS Open Payments Datastore Query Datastore SQL API](https://apis.io/collections/open-payments/open-open-payments-datastore-sql-api/)
+- [CMS Open Payments Datastore Query Download API](https://apis.io/collections/open-payments/open-open-payments-download-api/)
+- [CMS Open Payments Datastore Query Metastore API](https://apis.io/collections/open-payments/open-open-payments-metastore-api/)
+- [CMS Open Payments Datastore Query Search API](https://apis.io/collections/open-payments/open-open-payments-search-api/)
 
-Query research payment records — payments and transfers of value made in connection with a formal research agreement or clinical research protocol, including study names, principal investigators, and associated recipients — through the same datastore query interface, one distribution per program year.
+#### Security (2)
 
-- **Human URL:** [https://openpaymentsdata.cms.gov/about/api](https://openpaymentsdata.cms.gov/about/api)
-- **Base URL:** `https://openpaymentsdata.cms.gov/api/1`
+Authentication, trust centre, and vulnerability disclosure.
 
-### Open Payments Ownership and Investment API
+- [Open Payments Authentication](https://apis.io/security/open-payments/open-payments-authentication/)
+- [Open Payments Domain Security](https://apis.io/security/open-payments/open-payments-domain-security/)
 
-Query ownership and investment interest records — physician (and immediate family member) ownership or investment stakes in reporting manufacturers and GPOs — by program year, useful for surfacing potential financial conflicts of interest.
+#### Plans and pricing (1)
 
-- **Human URL:** [https://openpaymentsdata.cms.gov/about/api](https://openpaymentsdata.cms.gov/about/api)
-- **Base URL:** `https://openpaymentsdata.cms.gov/api/1`
+Published plans, tiers and prices.
 
-### Open Payments Datastore Query API
+- [Open Payments Plans Pricing](https://apis.io/plans/open-payments/open-payments-plans-pricing/)
 
-The generic DKAN datastore access layer beneath every Open Payments dataset — a structured query endpoint (conditions, properties, sorts, limit, offset over GET or POST), a SQL query endpoint at `/datastore/sql`, and CSV/JSON download. Works against any distribution by dataset id and index, or directly by distribution id.
+#### Rate limits (1)
 
-- **Human URL:** [https://openpaymentsdata.cms.gov/about/api](https://openpaymentsdata.cms.gov/about/api)
-- **Base URL:** `https://openpaymentsdata.cms.gov/api/1`
+Published request limits.
 
-### Open Payments Metastore and Search API
+- [Open Payments Rate Limits](https://apis.io/rate-limits/open-payments/open-payments-rate-limits/)
 
-The DCAT-US metastore catalog and search over all Open Payments datasets — list and retrieve dataset metadata (with reference ids to resolve distribution and datastore identifiers), browse data dictionaries, and full-text or faceted search across program years and payment categories.
+#### FinOps (1)
 
-- **Human URL:** [https://openpaymentsdata.cms.gov/about/api](https://openpaymentsdata.cms.gov/about/api)
-- **Base URL:** `https://openpaymentsdata.cms.gov/api/1`
+What the API costs to run, by operation.
 
-## Example Queries
+- [Open Payments Finops](https://apis.io/finops/open-payments/open-payments-finops/)
 
-Every call below is anonymous — no key required.
+## Where to find this API
 
-```
-# List datasets (metastore catalog)
-GET https://openpaymentsdata.cms.gov/api/1/metastore/schemas/dataset/items?page-size=10
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-# Resolve a dataset's distribution id
-GET https://openpaymentsdata.cms.gov/api/1/metastore/schemas/dataset/items/0380bbeb-aea1-58b6-b708-829f92a48202?show-reference-ids
-
-# Query 2021 General Payment Data (11.5M rows), first 10
-GET https://openpaymentsdata.cms.gov/api/1/datastore/query/0380bbeb-aea1-58b6-b708-829f92a48202/0?limit=10
-
-# Structured POST query
-POST https://openpaymentsdata.cms.gov/api/1/datastore/query/0380bbeb-aea1-58b6-b708-829f92a48202/0
-{
-  "conditions": [ { "property": "recipient_state", "value": "CA", "operator": "=" } ],
-  "properties": ["covered_recipient_npi", "total_amount_of_payment_usdollars"],
-  "sorts": [ { "property": "total_amount_of_payment_usdollars", "order": "desc" } ],
-  "limit": 25
-}
-
-# Bulk download as CSV
-GET https://openpaymentsdata.cms.gov/api/1/datastore/query/0380bbeb-aea1-58b6-b708-829f92a48202/0/download?format=csv
-
-# SQL query
-GET https://openpaymentsdata.cms.gov/api/1/datastore/sql?query=[SELECT * FROM resource-id][LIMIT 10];
-```
-
-## Common Properties
-
-- [Authentication](authentication/open-payments-authentication.yml) — none required for reads
-- [Domain Security](security/open-payments-domain-security.yml)
 - [Website](https://openpaymentsdata.cms.gov)
 - [Documentation](https://openpaymentsdata.cms.gov/about/api)
-- [Program Home](https://www.cms.gov/priorities/key-initiatives/open-payments)
-- [Plans](plans/open-payments-plans-pricing.yml)
-- [Rate Limits](rate-limits/open-payments-rate-limits.yml)
-- [Fin Ops](finops/open-payments-finops.yml)
+- [Sign up](https://www.cms.gov/priorities/key-initiatives/open-payments)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 28.1** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 44.4 |
+| Contract governance | 0.0 |
+| Operational transparency | 7.9 |
+| Developer ergonomics | 32.9 |
+| Access clarity | 18.4 |
+
+**Agent readiness 17.9** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 11.8** — Government & Public Sector
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/open-payments/](https://apis.io/providers/open-payments/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for CMS Open Payments: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/open-payments/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
